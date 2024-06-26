@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "Sửa Sản Phẩm";
+
+}
+@model WebsiteTheFaceShop.Models.SANPHAM
+@using WebsiteTheFaceShop.Areas.HtmlHelpers
+
+<style>
+    .zoom {
+        transition: transform .5s;
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .zoom:hover {
+        transform: scale(2.5);
+    }
+</style>
+
+@using (Html.BeginForm("ChinhSuaSP", "QL_SanPham", new { area = "Admin" }, FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+<div class="row">
+    @*@Html.InputHelp("col-md-6", "Nhập mã sản phẩm", "MaSP", "Mã sản phẩm", @Model.MaSP + "");*@
+
+    <div class="col-md-6 d-none">
+        @Html.Label("Mã sản phẩm")
+        @Html.TextBoxFor(row => row.MaSP, new { @readonly = "readonly" })
+    </div>
+
+    @Html.InputHelp("col-md-6", "Nhập tên sản phẩm", "TenSP", "Tên Sản Phẩm", @Model.TenSP)
+
+    <div class="col-md-6">
+        <label for="TenLoai">Tên loại</label>
+        <select class="form-select"
+                name="TenLoai"
+                id="TenLoai">
+            <option value="">Vui lòng chọn</option>
+            @foreach (var item in ViewBag.TenLoai)
+            {
+                if (item.Selected)
+                {
+                    <option value="@item.Value" selected>@item.Text</option>
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label for="TenThuongHieu">Tên thương hiệu</label>
+        <select class="form-select"
+                name="TenThuongHieu"
+                id="TenThuongHieu">
+            <option value="">Vui lòng chọn</option>
+            @foreach (var item in ViewBag.TenThuongHieu)
+            {
+                if (item.Selected)
+                {
+                    <option value="@item.Value" selected>@item.Text</option>
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label for="MaDanhMuc">Danh Mục</label>
+        <select class="form-select"
+                name="MaDanhMuc"
+                id="MaDanhMuc">
+            @foreach (var item in ViewBag.DanhMuc)
+            {
+                if (item.MaDanhMuc == Model.MaDanhMuc)
+                {
+                    <option value="@item.MaDanhMuc" selected>@item.MaDanhMuc - @item.TenDanhMuc</option>
+                }
+                else
+                {
+                    <option value="@item.MaDanhMuc">@item.MaDanhMuc - @item.TenDanhMuc</option>
+                }
+            }
+        </select>
+    </div>
+    @Html.InputHelp("col-md-6", "Nhập đơn giá mua", "DonGiaMua", "Đơn giá mua", "" + @Model.DonGiaMua)
+
+    @Html.InputHelp("col-md-6", "Nhập đơn giá bán", "DonGiaBan", "Đơn giá bán", "" + @Model.DonGiaBan)
+
+    @Html.InputHelp("col-md-6", "Nhập số lượng", "SoLuong", "Số lượng", "" + @Model.SoLuong)
+
+    @Html.InputHelp("col-md-6", "Nhập số tiền được giảm", "GiamGia", "Giảm giá", "" + string.Format("{0:N0}", @Model.GiamGia))
+
+    @Html.LabelFor(row => row.TenHinh, "Hình ảnh")
+    <div class="col-md-6 ">
+        <img class="mt-2 zoom" id="preview" src="~/Content/images/@Model.TenHinh" style="width:200px; object-fit: cover" />
+        @ViewBag.Thongbao
+        <br />
+        <input class="mt-2" type="file" name="uploadHinh" id="uploadHinh" accept="image/*" required onchange="previewImage(event)" />
+    </div>
+
+    <div class="col-12">
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="MoTa">@Model.MoTa</textarea>
+        </div>
+    </div>
+
+
+
+
+</div>
+    <div class="text-center">
+        <input type="submit" name="submit" class="btn btn-primary" value="Sửa" />
+    </div>
+}
+@*<form action="/Admin/QL_SanPham/ChinhSuaSP" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="MaSP">Mã sản phẩm</label>
+                <input type="text"
+                       class="form-control"
+                       name="MaSP"
+                       id="MaSP"
+                       placeholder="Nhập mã sản phẩm"
+                       value="@Model.MaSP"/>
+            </div>
+
+            <div class="col-md-6">
+                <label for="TenSP">Tên Sản Phẩm</label>
+                <input type="text"
+                       class="form-control"
+                       name="TenSP"
+                       id="TenSP"
+                       placeholder="Nhập tên sản phẩm"
+                       value="@Model.TenSP" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="TenLoai">Tên loại</label>
+                <select class="form-select"
+                        name="TenLoai"
+                        id="TenLoai">
+                    @foreach (var item in ViewBag.TenLoai)
+                    {
+                        if (item.TenLoai == Model.TenLoai)
+                        {
+                            <option value="@item.TenLoai" selected>@item.TenLoai</option>
+                        }
+                        else
+                        {
+                            <option value="@item.TenLoai">@item.TenLoai</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="TenThuongHieu">Tên thương hiệu</label>
+                <select class="form-select"
+                        name="TenThuongHieu"
+                        id="TenThuongHieu">
+                    <option value="">Vui lòng chọn</option>
+                    @foreach (var item in ViewBag.TenThuongHieu)
+                    {
+                        if (item.TenThuongHieu == Model.TenThuongHieu)
+                        {
+                            <option value="@item.TenThuongHieu" selected>@item.TenThuongHieu</option>
+                        }
+                        else
+                        {
+                            <option value="@item.TenThuongHieu">@item.TenThuongHieu</option>
+                        }
+
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Dongiamua">Đơn giá mua</label>
+                <input type="text"
+                       class="form-control"
+                       name="DonGiaMua"
+                       id="DonGiaMua"
+                       placeholder="Nhập đơn giá mua"
+                       value="@string.Format("{0:N0}", @Model.DonGiaMua)" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="Dongiaban">Đơn giá bán</label>
+                <input type="text"
+                       class="form-control"
+                       name="DonGiaBan"
+                       id="DonGiaBan"
+                       placeholder="Nhập đơn giá bán"
+                       value="@string.Format("{0:N0}", @Model.DonGiaBan)" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="SoLuong">Số lượng</label>
+                <input type="text"
+                       class="form-control"
+                       name="SoLuong"
+                       id="SoLuong"
+                       placeholder="Nhập số lượng"
+                       value="@Model.SoLuong" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="GiamGia">Giảm giá</label>
+                <input type="text"
+                       class="form-control"
+                       name="GiamGia"
+                       id="GiamGia"
+                       placeholder="Nhập số tiền được giảm"
+                       value="@string.Format("{0:N0}", @Model.GiamGia)" />
+            </div>
+
+            <div class="col-md-6">
+                <label for="Dongiamua">Hình ảnh</label>
+                <input type="file"
+                       class="form-control"
+                       name="TenHinh"
+                       id="TenHinh"
+                       value="@Model.TenHinh" />
+            </div>
+
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"name="MoTa">@Model.MoTa</textarea>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="text-center">
+            <input type="submit" name="submit" class="btn btn-primary" value="Sửa" />
+        </div>
+
+    </form>*@
+@*<a class="btn btn-outline-primary text-decoration-none" href="/Admin/QL_SanPham/TrangChu">Trở về trang chủ</a>*@
+@Html.ActionLink("Trở về trang chủ", "TrangChu", "QL_SanPham", null, new { @class = "btn btn-outline-primary text-decoration-none" })

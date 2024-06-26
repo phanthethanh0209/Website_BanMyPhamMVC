@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Khuyến mãi khủng";
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebsiteTheFaceShop.Models.SANPHAM>
+<link rel="stylesheet" href="~/root/css/style_SanPham.css">
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<div id="main">
+    <div id="content">
+        <div class="grid">
+            <div class="grid__row">
+                <!--THANH BAR BÊN TRÁI-->
+                <div class="grid_column-2">
+                    <div class="aside-filter">
+                        <div class="headding-filter">
+                            <h2 class="title-head">Bộ lọc</h2>
+                            <p>Giúp bạn tìm kiếm sản phẩm nhanh hơn</p>
+                        </div>
+                        <hr>
+                        <div class="filter">
+                            <h3>Thương hiệu</h3>
+                            <div class="search-filter">
+                                <input type="text" placeholder="Tìm thương hiệu">
+                                <a class="bg-icon-search" href=""><i class="ti-search "></i></a>
+                            </div>
+                            <div class="filter-brand">
+                                <ul class="filter-option">
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>3CE</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>AFC</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>AGAPAN</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>3W Clinic</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>A-DERMA</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>Vichy</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>Victoria's</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h3>Giá sản phẩm</h3>
+                            <div class="filter-price">
+                                <ul class="filter-option">
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>Giá dưới 100.000đ</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>100.000đ - 200.000đ</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>200.000đ - 300.000đ</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>300.000đ - 500.000đ</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>500.000đ - 1.000.000đ</span>
+                                    </li>
+                                    <li class="filter-item">
+                                        <input type="checkbox"><span>Trên 1.000.000đ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="featured-products">
+                        <h2 class="title" style="font-size: 22pt"><a href="#">Sản phẩm nổi bật</a></h2>
+                        <div class="list-product">
+                            @*Lấy 5 sản phẩm*@
+                            @for (int i = 0; i < 5 && i < Model.Count; i++)
+                            {
+                                var product = Model[i];
+                                <div class="product-item">
+                                    <div class="product-img">
+                                        <a href="/SanPham/ChiTietSP/@product.MaSP">
+                                            <img title="@product.TenSP" src="~/Content/images/@product.TenHinh" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-shop">
+                                        <h3 class="product-name" title="@product.TenSP">
+                                            <a href="/SanPham/ChiTietSP/@product.MaSP">@product.TenSP</a>
+                                        </h3>
+                                        <div class="product-item-price">@string.Format("{0:N0}", @product.DonGiaBan) đ</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!--DANH SÁCH SP LOAD LÊN TỪ DATABASE-->
+                <div class="grid_colum-10">
+                    <div class="grid__row">
+
+                        <div class="home-filter-headding" style="height:60px;width:100%">
+                            <h1 class="home-title-product">
+                                Big Deal - Chốt Kèoo
+                            </h1>
+                            <div class="home-filter">
+                                <ul class="list-filter">
+                                    Ưu tiên xem:
+                                    <li><a href=""><i class="ti-check"></i> Hàng mới</a> </li>
+                                    <li><a href=""><i class="ti-check"></i> Giá tăng dần</a> </li>
+                                    <li><a href=""><i class="ti-check"></i> Giá giảm dần</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="grid_column-2-4">
+                                <div class="home-product-item" href="#">
+                                    @*hàm Uri.EscapeDataString() để mã hóa tên tệp hình ảnh trước khi sử dụng nó trong CSS, giúp tránh trường hợp tên ảnh có chứa khoảng trắng,..*@
+                                    <div class="product-item-img" title="@item.TenSP" style="background-image: url('../../Content/images/@Uri.EscapeDataString(item.TenHinh)');"></div>
+                                    <h4 class="product-item-name" title="@item.TenSP">@item.TenSP</h4>
+                                    <div class="product-item-price">
+                                        <span class="price-current">@string.Format("{0:N0}", @item.DonGiaBan)</span>
+                                        <span class="vnd">₫</span>
+                                        <span class="price-old">350.000</span>
+                                        <span class="vnd">₫</span>
+                                    </div>
+                                    <div class="product-item-action">
+                                        <span class="product-item-action-like product-item-action-like-liked">
+                                            <i class="product-item-action-like-empty ti-heart"></i>
+                                            <i class="product-item-action-like-fill fa-solid fa-heart"></i>
+                                        </span>
+                                        <div class="product-item-action-rating">
+                                            <i class="product-item-action-star-gold fa-solid fa-star"></i>
+                                            <i class="product-item-action-star-gold fa-solid fa-star"></i>
+                                            <i class="product-item-action-star-gold fa-solid fa-star"></i>
+                                            <i class="product-item-action-star-gold fa-solid fa-star"></i>
+                                            <i class="product-item-action-star-gold fa-solid fa-star"></i>
+                                        </div>
+                                        @*<span class="product-item-sold">
+                                            605 đã bán
+                                        </span>*@
+                                    </div>
+                                    <div class="product-item-favourite">
+                                        <!-- <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span> -->
+                                        <img class="flash-sale" src="~/root/img/label_sale.png" alt="">
+                                    </div>
+                                    <!-- <div class="product-item-sale-off">
+                                <span class="product-item-sale-off-percent">10%</span>
+                                <span class="product-item-sale-off-label">GIẢM</span>
+                                </div> -->
+                                    <a class="product-item-btn-information" href="/SanPham/ChiTietSP/@item.MaSP">
+                                        Xem chi tiết sản phẩm
+                                    </a>
+                                    @*<button id="product-item-btn-addcart" class="product-item-btn-addcart" href="#">*@
+                                    @*<a class="product-item-btn-addcart" href="/Cart/AddItem?productId=@item.MaSP&quantity=1">Thêm vào giỏ hàng</a>*@
+                                    <a class="product-item-btn-addcart" href="/Cart/AddItem?productId=@item.MaSP&quantity=1">Thêm vào giỏ hàng</a>
+                                    @*@Html.ActionLink("Mã Sản Phẩm", "TrangChu", "QL_SanPham", new { SortColumn = "MaSP", IconClass = iconClass, page = 1 }, null)*@
+                                    @*</button>*@
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="pager">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("KhuyenMai", new { page }))
+        </div>
+    </div>
+</div>
+

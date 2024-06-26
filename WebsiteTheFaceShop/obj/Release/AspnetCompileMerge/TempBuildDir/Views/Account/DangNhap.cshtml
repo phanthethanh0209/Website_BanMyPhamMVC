@@ -1,0 +1,51 @@
+﻿@model WebsiteTheFaceShop.ViewModels.DangNhap
+
+<head>
+    <link href="~/root/css/style_DangKi.css" rel="stylesheet" />
+</head>
+
+@{
+    ViewBag.Title = "Đăng Nhập";
+}
+
+<div id="main">
+    <div id="content">
+        <div class="container">
+            @using (Html.BeginForm("DangNhap", "Account", FormMethod.Post, new { @class = "custom_form_box" }))
+            {
+                <div class="container w-100 px-4 pe-4">
+                    <div class="text-center">
+                        <h2 class="pt-3" style="color: deepskyblue ">ĐĂNG NHẬP</h2>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(t => t.Username,"Tên tài khoản", new {@class = "text-danger" })
+                        @Html.TextBoxFor(t => t.Username, new { placeholder = "Username", @class = "form-control" })
+                        @Html.ValidationMessageFor(t => t.Username)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(t => t.Password,"Mật khẩu", new { @class = "text-danger" })
+                        @Html.PasswordFor(t => t.Password, new { placeholder = "Password", @class = "form-control" })
+                        @Html.ValidationMessageFor(t => t.Password)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.ValidationSummary()
+                    </div>
+
+                    <div class="d-flex">
+                        <p class="p-2 m-0">Bạn chưa có tài khoản?</p> 
+                        <p class="p-2 m-0 fw-bold text-primary"> <a href="/Account/DangKy">Đăng ký ở đây nhé</a> </p>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn mt-2" id="submit" style="background: linear-gradient(to right, #fff, #81c27e); ">ĐĂNG NHẬP</button>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

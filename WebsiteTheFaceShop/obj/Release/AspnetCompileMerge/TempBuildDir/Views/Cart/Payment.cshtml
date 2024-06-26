@@ -1,0 +1,355 @@
+﻿@{
+    ViewBag.Title = "Thanh toán";
+    decimal total = 0;
+}
+
+@model List<WebsiteTheFaceShop.ViewModels.GioHang>
+
+<link rel="stylesheet" href="~/root/css/style_main.css">
+@section jsFooter {
+    <script src="/root/js/controller/cartController.js"></script>
+}
+
+    <style>
+         .btn-remove {
+            font-size: 10px;
+            max-width: 22px;
+            height: 22px;
+            color: rgb(0, 0, 0);
+            background-color: rgb(223, 223, 223);
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            border-radius: 11px;
+            text-align: center;
+            flex-basis: 33%;
+        }
+
+            .btn-remove:hover {
+                background-color: #ed6f69;
+                color:#fff;
+            }
+    </style>
+        <div class="container">
+                @using (Html.BeginForm("Payment", "Cart", FormMethod.Post, new { @class = "needs-validation" }))
+                {
+                <div class="row pt-4">
+                    <div class="col-md-4 order-md-2 mb-4 m-0 position-sticky top-0">
+                        <div class="col-xl-12 col-lg-12 d-flex justify-content-center  border border-3 rounded shadow-lg">
+                            <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+                                <h4 class="mb-3 pt-3 pb-3">Đơn hàng</h4>
+                                @foreach (var item in Model)
+                                {
+                                    var sum = item.SanPham.DonGiaBan.GetValueOrDefault(0) * item.SoLuong;
+                                    total += sum;
+                                    <div class="row mb-3">
+                                        <div class="col-4 ">
+                                            <img src="~/root/img/@item.SanPham.TenHinh" style="height: 96px; width: 96px;" class="img-sm rounded border" />
+                                        </div>
+                                        <div class="col-8">
+                                            @*click sẽ qua chi tiết sản phẩm*@
+                                            @*<div class="d-flex justify-content-between">*@
+                                                <a href="#" class="nav-link">
+                                                    @item.SanPham.TenSP
+                                                </a>
+                                                    @*<a href="#" data-id="@item.SanPham.MaSP" class="btn-remove btn-delete border-0 ">-</a>*@
+
+                                            @*</div>*@
+                                            <div>
+                                                <span>Mã sản phẩm: @item.SanPham.MaSP</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex flex-row">
+
+                                                    @*<input id="form1" min="0" name="quantity" value="2" type="number"
+                                            class="form-control form-control-sm" style="width: 50px;" />*@
+                                                    <input type="number" onmousewheel="return false;" readonly="readonly" name="quantity" class="txtQuantity form-control form-control-sm" data-id="@item.SanPham.MaSP" value="@item.SoLuong" min="1" style="width: 50px;" />
+
+                                                </div>
+
+                                                <div class="price text-muted">@item.SanPham.DonGiaBan.GetValueOrDefault(0).ToString("N0")</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-2">Tổng giá trị đơn hàng:</p>
+                                    <p class="mb-2">@total.ToString("N0")</p>
+                                </div>
+                                @*<div class="d-flex justify-content-between">
+                            <p class="mb-2">Giảm giá:</p>
+                            <p class="mb-2 text-danger">- $60.00</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">tổng tiền ship:</p>
+                            <p class="mb-2">+ $14.00</p>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Total price:</p>
+                            <p class="mb-2 fw-bold">$149.90</p>
+                        </div>
+
+                        <div class="input-group mt-3 mb-4">
+                            <input type="text" class="form-control border" name="" placeholder="Promo code" />
+                            <button class="btn btn-light text-primary border">Apply</button>
+                        </div>*@
+                                <hr />
+                                <button class="btn btn-primary w-100 mt-2 my-3" type="submit">Đặt hàng</button>
+                                <p style="text-align:center">Khi tiếp tục bạn đồng ý với các điều khoản và điều kiện chính sách</p>
+                                <h6 style="text-align:center">"Vui lòng không hủy đơn hàng khi đã thanh toán"</h6>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 order-md-1 border border-3 rounded-3 shadow-sm">
+                        <div class="container mb-3" style="background-color: #f3f3f3; border-top-right-radius: 10px; border-top-left-radius: 10px;">
+                            <div class="d-flex pt-3 pb-3 justify-content-center align-items-center">
+                                <h4 class="">
+                                    Thông tin người mua hàng
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4 class="mb-3">Thông tin liên lạc</h4>
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group">
+                                    <label>Người nhận</label>
+                                    <input name="shipName" class="form-control" required/>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label>Điện thoại</label>
+                                    <input name="mobile" class="form-control" required/>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Valid phonenumber is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label>Địa chỉ email</label>
+                                    <input name="emailaddress" class="form-control"required />
+                                </div>
+                                <div class="invalid-feedback">
+                                    Valid Email is required.
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="mb-3">Thông tin nhận hàng</h4>
+                        <div>
+                            <label for="myState">TỈNH/THÀNH</label>
+                            <select id="city" aria-label=".form-select-sm" class="form-control" required="">
+                                <option value="" selected>Chọn tỉnh thành</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3 my-3">
+                                <label for="myState">QUẬN/HUYỆN</label>
+                                <select id="district" aria-label=".form-select-sm" class="form-control" required="">
+                                    <option value="" selected>Chọn quận huyện</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3 my-3">
+                                <label for="myState">PHƯỜNG/XÃ</label>
+                                <select id="ward" aria-label=".form-select-sm" class="form-control" required="">
+                                    <option value="" selected>Chọn phường xã</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input name="address" class="form-control" id="addressInput" required/>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter your shipping address.
+                            </div>
+                        </div>
+
+                        @*<script>
+                            // Lấy các phần tử
+                            var citySelect = document.getElementById("city");
+                            var districtSelect = document.getElementById("district");
+                            var wardSelect = document.getElementById("ward");
+                            var addressInput = document.getElementById("addressInput");
+
+                            // Lắng nghe sự kiện khi input address mất tiêu trên trường
+                            addressInput.addEventListener("blur", function () {
+                                // Lấy giá trị của các phần tử (Phường, Quận, Thành Phố)
+                                var cityValue = citySelect.value;
+                                var districtValue = districtSelect.value;
+                                var wardValue = wardSelect.value;
+
+                                // Tạo một biến để lưu địa chỉ
+                                var fullAddress = "";
+
+                                if (cityValue) {
+                                    fullAddress += cityValue.options[districtSelect.selectedIndex].text;;
+                                }
+                                if (districtValue) {
+                                    if (fullAddress) {
+                                        fullAddress += ", " + districtValue.toString();
+                                    } else {
+                                        fullAddress += districtSelect.options[districtSelect.selectedIndex].text;;
+                                    }
+                                }
+                                if (wardValue) {
+                                    if (fullAddress) {
+                                        fullAddress += ", " + wardValue.options[districtSelect.selectedIndex].text;;
+                                    } else {
+                                        fullAddress += wardValue.toString();
+                                    }
+                                }
+
+
+                                // Gán giá trị địa chỉ vào input address
+                                addressInput.value = fullAddress;
+                            });
+
+
+                        </script>*@
+
+
+                        <br />
+                        <div class="col-md-8 order-md-1 w-100">
+                            <div class="p-2" style="background-color: #f3f3f3; border-top-right-radius: 10px; border-top-left-radius: 10px; height: 50px">
+                                <h4 class="mx-4">
+                                    Phương thức thanh toán
+                                </h4>
+                            </div>
+
+                            <div class="needs-validation" novalidate>
+                                <div class="row my-3">
+                                    <div class="d-block">
+                                        <div class="custom-control custom-radio my-3 bg- border border-black w-100 h-25 d-flex align-items-center">
+                                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input mx-2" checked required>
+                                            <label class="custom-control-label" for="credit">Trả tiền mặt khi nhận hàng (COD)</label>
+                                        </div>
+                                        <div class="custom-control custom-radio my-3 bg- border border-black w-100 h-25 d-flex align-items-center">
+                                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input mx-2" checked required>
+                                            <label class="custom-control-label" for="credit">
+                                                Thẻ ATM/Visa/Master/JCB/QR Pay/Ví điện tử khác của Payaa
+                                            </label>
+                                            <img src="~/root/img/Payaa.png" style="margin-left:300px " />
+                                        </div>
+                                        <div class="custom-control custom-radio my-3 bg- border border-black w-100 h-25 d-flex align-items-center">
+                                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input mx-2" required>
+                                            <label class="custom-control-label" for="debit">
+                                                Ví momo
+                                                <img src="~/root/img/Momo.png" style="margin-left:650px " />
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio my-3 bg- border border-black w-100 h-25 d-flex align-items-center">
+                                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input mx-2" required>
+                                            <label class="custom-control-label" for="paypal">
+                                                Fundiin - Mua trước trả sau 0% lãi suất
+                                                <img src="~/root/img/Giamgia.png" style="margin-left:40px" />
+                                                <img src="~/root/img/Fundi.png" style="margin-left:150px" />
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio my-3 bg- border border-black w-100 h-25 d-flex align-items-center">
+                                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input mx-2" required>
+                                            <label class="custom-control-label" for="paypal">
+                                                Ví trả sau - Momo
+                                                <img src="~/root/img/Momo2.png" style="margin-left:600px " />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br /><br /><br /><br /><br />
+                        <div class="col-md-8 order-md-1 w-100 ">
+                            <div class="p-2" style="background-color: #f3f3f3; border-top-right-radius: 10px; border-top-left-radius: 10px; height: 50px">
+                                <h4 class="mx-4">
+                                    Phương thức vận chuyển
+                                </h4>
+                            </div>
+                            <div class="needs-validation" novalidate>
+                                <div class="row my-3">
+                                    <div class="d-block">
+                                        <div class="custom-control custom-radio my-3 mx-2">
+                                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                            <label class="custom-control-label" for="credit">Giao hàng trong 24h (Giao giờ hành chính)</label>
+                                        </div>
+                                        <div class="custom-control custom-radio my-3 mx-2">
+                                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="debit">Giao hàng tiêu chuẩn (3-6 ngày)(Giao giờ hành chính)</label>
+                                        </div>
+                                        <div class="custom-control custom-radio my-3 mx-2">
+                                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="paypal">[Now] Giao hàng nhanh trong vòng 2 giờ </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+        </div>
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <h6>Gặp khó khăn khi thanh toán? truy cập <a href="#">Trung tâm hỗ trợ</a> để được trợ giúp</h6>
+            <p class="mb-1">&copy;2023 The Face Shop </p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <script>
+            var citis = document.getElementById("city");
+            var districts = document.getElementById("district");
+            var wards = document.getElementById("ward");
+            var Parameter = {
+                url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                method: "GET",
+                responseType: "application/json",
+            };
+            var promise = axios(Parameter);
+            promise.then(function (result) {
+                renderCity(result.data);
+            });
+
+            function renderCity(data) {
+                for (const x of data) {
+                    citis.options[citis.options.length] = new Option(x.Name, x.Id);
+                }
+                citis.onchange = function () {
+                    district.length = 1;
+                    ward.length = 1;
+                    if (this.value != "") {
+                        const result = data.filter(n => n.Id === this.value);
+
+                        for (const k of result[0].Districts) {
+                            district.options[district.options.length] = new Option(k.Name, k.Id);
+                        }
+                    }
+                };
+                district.onchange = function () {
+                    ward.length = 1;
+                    const dataCity = data.filter((n) => n.Id === citis.value);
+                    if (this.value != "") {
+                        const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+                        for (const w of dataWards) {
+                            wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                        }
+                    }
+                };
+            }
+        </script>

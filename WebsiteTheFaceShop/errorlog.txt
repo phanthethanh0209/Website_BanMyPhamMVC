@@ -1,0 +1,129 @@
+MessageD:\1.Hoc Tap\BAI TAP\HOC KI V\LTW\Buoi4\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_User\TrangChu.cshtml(27): error CS1061: 'AppUser' does not contain a definition for 'NgaySinnh' and no accessible extension method 'NgaySinnh' accepting a first argument of type 'AppUser' could be found (are you missing a using directive or an assembly reference?)
+MessageNullable object must have a value.
+MessageD:\1.Hoc Tap\BAI TAP\HOC KI V\LTW\Buoi4\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_User\TrangChu.cshtml(27): error CS1501: No overload for method 'ToString' takes 1 arguments
+MessageThe view 'TrangChu' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/QL_DonHang/TrangChu.aspx
+~/Views/QL_DonHang/TrangChu.ascx
+~/Views/Shared/TrangChu.aspx
+~/Views/Shared/TrangChu.ascx
+~/Views/QL_DonHang/TrangChu.cshtml
+~/Views/QL_DonHang/TrangChu.vbhtml
+~/Views/Shared/TrangChu.cshtml
+~/Views/Shared/TrangChu.vbhtml
+MessageThe view 'TrangChu' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/QL_DonHang/TrangChu.aspx
+~/Views/QL_DonHang/TrangChu.ascx
+~/Views/Shared/TrangChu.aspx
+~/Views/Shared/TrangChu.ascx
+~/Views/QL_DonHang/TrangChu.cshtml
+~/Views/QL_DonHang/TrangChu.vbhtml
+~/Views/Shared/TrangChu.cshtml
+~/Views/Shared/TrangChu.vbhtml
+MessageD:\HK5\Lập Trình Web\Tiểu luận\WebsiteTheFaceShop\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_DonHang\TrangChu.cshtml(4): error CS0818: Implicitly-typed variables must be initialized
+MessageD:\HK5\Lập Trình Web\Tiểu luận\WebsiteTheFaceShop\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_DonHang\TrangChu.cshtml(4): error CS0818: Implicitly-typed variables must be initialized
+MessageD:\HK5\Lập Trình Web\Tiểu luận\WebsiteTheFaceShop\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_DonHang\TrangChu.cshtml(4): error CS0818: Implicitly-typed variables must be initialized
+MessageD:\HK5\Lập Trình Web\Tiểu luận\WebsiteTheFaceShop\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_DonHang\TrangChu.cshtml(4): error CS0818: Implicitly-typed variables must be initialized
+MessageThe model item passed into the dictionary is of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.CTHOADON]', but this dictionary requires a model item of type 'WebsiteTheFaceShop.Models.CTHOADON'.
+MessageThe model item passed into the dictionary is of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.CTHOADON]', but this dictionary requires a model item of type 'WebsiteTheFaceShop.Models.CTHOADON'.
+MessageC:\Users\ASUS\AppData\Local\Temp\Temporary ASP.NET Files\vs\477d5022\3de00d06\App_Web_xemchitiet.cshtml.2a2a0e6c.6vvfrdss.0.cs(200): error CS1525: Invalid expression term '+='
+MessageC:\Users\ASUS\AppData\Local\Temp\Temporary ASP.NET Files\vs\477d5022\3de00d06\App_Web_xemchitiet.cshtml.2a2a0e6c.nba61keu.0.cs(200): error CS1525: Invalid expression term '+='
+MessageC:\Users\ASUS\AppData\Local\Temp\Temporary ASP.NET Files\vs\477d5022\3de00d06\App_Web_xemchitiet.cshtml.2a2a0e6c.-m0tzaue.0.cs(200): error CS1525: Invalid expression term '+='
+MessageExpected a "{" but found a "<".  Block statements must be enclosed in "{" and "}".  You cannot use single-statement control-flow statements in CSHTML pages. For example, the following is not allowed:
+
+@if(isLoggedIn)
+    <p>Hello, @user</p>
+
+Instead, wrap the contents of the block in "{}":
+
+@if(isLoggedIn) {
+    <p>Hello, @user</p>
+}
+
+MessageExpected a "{" but found a "<".  Block statements must be enclosed in "{" and "}".  You cannot use single-statement control-flow statements in CSHTML pages. For example, the following is not allowed:
+
+@if(isLoggedIn)
+    <p>Hello, @user</p>
+
+Instead, wrap the contents of the block in "{}":
+
+@if(isLoggedIn) {
+    <p>Hello, @user</p>
+}
+
+MessageThe using block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
+
+MessageEncountered end tag "div" with no matching start tag.  Are your start/end tags properly balanced?
+
+MessageEncountered end tag "div" with no matching start tag.  Are your start/end tags properly balanced?
+
+MessageThe action 'HeaderCart' is accessible only by a child request.
+MessageUnexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+
+MessageThe view 'TrangChu' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/QL_SanPham/TrangChu.aspx
+~/Views/QL_SanPham/TrangChu.ascx
+~/Views/Shared/TrangChu.aspx
+~/Views/Shared/TrangChu.ascx
+~/Views/QL_SanPham/TrangChu.cshtml
+~/Views/QL_SanPham/TrangChu.vbhtml
+~/Views/Shared/TrangChu.cshtml
+~/Views/Shared/TrangChu.vbhtml
+MessageThe view 'TrangChu' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/QL_SanPham/TrangChu.aspx
+~/Views/QL_SanPham/TrangChu.ascx
+~/Views/Shared/TrangChu.aspx
+~/Views/Shared/TrangChu.ascx
+~/Views/QL_SanPham/TrangChu.cshtml
+~/Views/QL_SanPham/TrangChu.vbhtml
+~/Views/Shared/TrangChu.cshtml
+~/Views/Shared/TrangChu.vbhtml
+MessageThe view 'TrangChu' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/QL_SanPham/TrangChu.aspx
+~/Views/QL_SanPham/TrangChu.ascx
+~/Views/Shared/TrangChu.aspx
+~/Views/Shared/TrangChu.ascx
+~/Views/QL_SanPham/TrangChu.cshtml
+~/Views/QL_SanPham/TrangChu.vbhtml
+~/Views/Shared/TrangChu.cshtml
+~/Views/Shared/TrangChu.vbhtml
+MessageThe action 'HeaderCart' is accessible only by a child request.
+MessageObject reference not set to an instance of an object.
+MessageThe model item passed into the dictionary is of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.SANPHAM]', but this dictionary requires a model item of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.DANHMUC]'.
+MessageThe model item passed into the dictionary is of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.SANPHAM]', but this dictionary requires a model item of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.DANHMUC]'.
+MessageObject reference not set to an instance of an object.
+MessageNo IUserTokenProvider is registered.
+MessageAn error occurred while updating the entries. See the inner exception for details.
+MessageAn error occurred while updating the entries. See the inner exception for details.
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult ChinhSuaSP(Int32)' in 'WebsiteTheFaceShop.Areas.Admin.Controllers.QL_SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult ChinhSuaSP(Int32)' in 'WebsiteTheFaceShop.Areas.Admin.Controllers.QL_SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult ChinhSuaSP(Int32)' in 'WebsiteTheFaceShop.Areas.Admin.Controllers.QL_SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+MessageThe model item passed into the dictionary is of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.SANPHAM]', but this dictionary requires a model item of type 'WebsiteTheFaceShop.Models.SANPHAM'.
+MessageThe model item passed into the dictionary is of type 'System.Collections.Generic.List`1[WebsiteTheFaceShop.Models.SANPHAM]', but this dictionary requires a model item of type 'WebsiteTheFaceShop.Models.SANPHAM'.
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult SPTheoDanhMuc(Int32)' in 'WebsiteTheFaceShop.Controllers.SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult XoaSP(Int32)' in 'WebsiteTheFaceShop.Areas.Admin.Controllers.QL_SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult XoaSP(Int32)' in 'WebsiteTheFaceShop.Areas.Admin.Controllers.QL_SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+MessageD:\1.Hoc Tap\BAI TAP\HOC KI V\LTW\PROJECT_CUOI_KY_2\Tesst\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_SanPham\XoaSP.cshtml(18): error CS1501: No overload for method 'DisplayFor' takes 5 arguments
+MessageD:\1.Hoc Tap\BAI TAP\HOC KI V\LTW\PROJECT_CUOI_KY_2\Tesst\WebsiteTheFaceShop\WebsiteTheFaceShop\Areas\Admin\Views\QL_SanPham\XoaSP.cshtml(18): error CS1501: No overload for method 'DisplayFor' takes 5 arguments
+MessageObject reference not set to an instance of an object.
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult ChiTietSP(Int32)' in 'WebsiteTheFaceShop.Controllers.SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+MessageExpected a "{" but found a "<".  Block statements must be enclosed in "{" and "}".  You cannot use single-statement control-flow statements in CSHTML pages. For example, the following is not allowed:
+
+@if(isLoggedIn)
+    <p>Hello, @user</p>
+
+Instead, wrap the contents of the block in "{}":
+
+@if(isLoggedIn) {
+    <p>Hello, @user</p>
+}
+
+MessageThe action 'HeaderCart' is accessible only by a child request.
+MessageThe parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult ChiTietSP(Int32)' in 'WebsiteTheFaceShop.Controllers.SanPhamController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters

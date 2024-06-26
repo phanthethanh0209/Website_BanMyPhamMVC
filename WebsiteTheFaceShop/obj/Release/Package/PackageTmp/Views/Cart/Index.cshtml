@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Index";
+    decimal total = 0;
+}
+
+@model List<WebsiteTheFaceShop.ViewModels.GioHang>
+
+@section jsFooter {
+    <script src="/root/js/controller/cartController.js"></script>
+}
+
+<style>
+    .delete-icon:hover i{
+        color: #ff9897;
+        cursor:pointer;
+
+    }
+
+    input {
+        width: 40px;
+    }
+
+</style>
+
+
+<div class="container-fluid min-vh-100">
+    <div class="wrapper-container ">
+        @if (Model.Count > 0)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+            <div style="background-color: #f8dbcd; color:#ed6f69;" class="text-center p-3">
+                <h1 >Chào mừng đến với đơn hàng của @User.Identity.Name 😘</h1>
+            </div>
+              
+            }
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã SP</th>
+                        <th scope="col">Tên SP</th>
+                        <th scope="col">Ảnh SP</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var sum = item.SanPham.DonGiaBan.GetValueOrDefault(0) * item.SoLuong;
+                        total += sum;
+                        <tr>
+                            <td>@item.SanPham.MaSP</td>
+                            <td align="left">@item.SanPham.TenSP</td>
+                            <td>
+                                <img src="~/Content/images/@item.SanPham.TenHinh" style="width: 100px;height:100px;object-fit: cover" alt="@item.SanPham.TenHinh" />
+                            </td>
+                            <td><input type="number" class="txtQuantity" data-id="@item.SanPham.MaSP" value="@item.SoLuong" min="1" style="" /></td>
+                            <td>@item.SanPham.DonGiaBan.GetValueOrDefault(0).ToString("N0") đ</td>
+                            <td>@((sum).ToString("N0")) đ</td>
+                            <td class="delete-icon"><i data-id="@item.SanPham.MaSP" class="btn-delete ti-trash d-block text-black "> </i></td>
+
+                            @*<div class="delete-icon">
+                                <i class="ti-trash"></i>
+                            </div>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p class="total-amount">Tổng tiền: @total.ToString("N0")</p>
+
+            <button id="btnContinue" class="btn btn-success">Tiếp tục mua hàng</button>
+            <button id="btnUpdate" class="btn btn-success">Cập nhật giỏ hàng hàng</button>
+            <button id="btnDeleteAll" class="btn btn-success">Xóa giỏ hàng</button>
+            <button id="btnPayment" class="btn btn-success">Thanh toán</button>
+        }
+        else
+        {
+            <div class="text-center alert alert-danger">
+                <h2>Bạn chưa có sản phẩm nào trong giỏ hàng</h2>
+            </div>
+        }
+    </div>
+</div>

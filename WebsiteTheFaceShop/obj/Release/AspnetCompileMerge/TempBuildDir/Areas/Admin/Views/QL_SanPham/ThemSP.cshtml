@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Thêm Sản Phẩm";
+
+}
+@model WebsiteTheFaceShop.Models.SANPHAM
+@using WebsiteTheFaceShop.Areas.HtmlHelpers
+
+<style>
+    .zoom {
+        transition: transform .5s;
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .zoom:hover {
+        transform: scale(2.5);
+    }
+</style>
+
+
+@using (Html.BeginForm("ThemSP", "QL_SanPham", new { area = "Admin" }, FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+{
+
+    <div class="row">
+        @*@Html.InputHelp("col-md-6", "Nhập mã sản phẩm", "MaSP", "Mã sản phẩm", "")*@
+        @*@Html.ValidationMessageFor(row =>row.MaSP)*@
+
+        @Html.InputHelp("col-md-6", "Nhập tên sản phẩm", "TenSP", "Tên Sản Phẩm", "")
+
+        @Html.InputHelp("col-md-6", "Nhập tên loại", "TenLoai", "Tên loại sản phẩm", "")
+
+        @Html.InputHelp("col-md-6", "Nhập tên thương hiệu", "TenThuongHieu", "Tên thương hiệu", "")
+
+
+        <div class="col-md-6">
+            <label for="MaDanhMuc">Danh Mục</label>
+            <select class="form-select"
+                    name="MaDanhMuc"
+                    id="MaDanhMuc">
+                @foreach (var item in ViewBag.DanhMuc)
+                {
+                    <option value="@item.MaDanhMuc" selected>@item.MaDanhMuc - @item.TenDanhMuc</option>
+                }
+            </select>
+        </div>
+
+
+
+        @Html.InputHelp("col-md-6", "Nhập đơn giá mua", "DonGiaMua", "Đơn giá mua", "")
+
+        @Html.InputHelp("col-md-6", "Nhập đơn giá bán", "DonGiaBan", "Đơn giá bán", "")
+
+        @Html.InputHelp("col-md-6", "Nhập số lượng", "SoLuong", "Số lượng", "")
+
+        @Html.InputHelp("col-md-6", "Nhập số tiền được giảm", "GiamGia", "Giảm giá", "")
+
+        <!--@Html.LabelFor(row => row.TenHinh, "Hình ảnh")
+        <div class="col-md-6 ">
+            <input type="file" name="uploadHinh" id="uploadHinh" accept="image/*" required />
+            @ViewBag.Thongbao
+            <img id="previewImage" src="#" alt="Preview" style="display: none; max-width: 100px; max-height: 100px;" />-->
+        @*@Html.TextBoxFor(row => row.TenHinh, new { @class = "form-control", type = "file" })*@
+        <!--</div>-->
+
+        @Html.LabelFor(row => row.TenHinh, "Hình ảnh")
+        <div class="col-md-6 ">
+            <img class="mt-2 zoom" id="preview" src="" style="width:200px; object-fit: cover" />
+            @ViewBag.Thongbao
+            <br />
+            <input class="mt-2" type="file" name="uploadHinh" id="uploadHinh" accept="image/*" required onchange="previewImage(event)" />
+        </div>
+
+        <div class="col-12 mt-2">
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="MoTa"></textarea>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="text-center">
+        <input type="submit" name="submit" class="btn btn-primary" value="Thêm" />
+    </div>
+}
+@*<form action="/Admin/QL_SanPham/ThemSP" method="post">
+
+    @*</form>*@
+@Html.ActionLink("Trở về trang chủ", "TrangChu", "QL_SanPham", null, new { @class = "btn btn-outline-primary text-decoration-none" })

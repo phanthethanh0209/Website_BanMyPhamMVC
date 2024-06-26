@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Danh sách User";
+}
+@model List<WebsiteTheFaceShop.Identity.AppUser>
+<div class="container-fluid mt-3">
+    <h2>Danh sách User</h2>
+    <table class="table table-hover table-bordered">
+
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Địa chỉ</th>
+                @*<th scope="col">Xem thông tin</th>*@
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <th scope="row">@item.UserName</th>
+                <td>@item.Email</td>
+                <td>@item.PhoneNumber</td>
+                @*kiểm tra xem NgaySinh có giá trị không. Nếu có, nó sẽ chuyển đổi ngày theo định dạng "dd/MM/yyyy". 
+                Nếu NgaySinh là null, thì sẽ hiển thị một chuỗi trống (không có gì hiển thị).*@
+                <td>@(item.NgaySinh.HasValue ? item.NgaySinh.Value.ToString("dd/MM/yyyy") : "")</td>
+                <td>@item.DiaChi</td>
+                @*<td class="text-center"><a class="text-decoration-none icon-link-hover fs-5" href="#">ℹ️</a></td>*@
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

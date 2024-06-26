@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Xem chi tiết SP";
+
+}
+
+<style>
+    .zoom {
+        transition: transform .5s;
+        width: 200px;
+        margin: 0 auto;
+    }
+
+        .zoom:hover {
+            transform: scale(2.5);
+        }
+</style>
+
+
+@model WebsiteTheFaceShop.Models.SANPHAM
+
+<h2>Chi tiết sản phẩm</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Mã sản phẩm</th>
+        <td>@Model.MaSP</td>
+    </tr>
+
+    <tr>
+        <th>Tên sản phẩm</th>
+        <td>@Model.TenSP</td>
+    </tr>
+
+    <tr>
+        <th>Tên loại</th>
+        <td>@Model.TenLoai</td>
+    </tr>
+
+    <tr>
+        <th>Tên thương hiệu</th>
+        <td>@Model.TenThuongHieu</td>
+    </tr>
+
+    <tr>
+        <th>Tên danh mục</th>
+        <td>@ViewBag.TenDanhMuc</td>
+    </tr>
+
+    <tr>
+        <th>Đơn giá mua</th>
+        <td>@string.Format("{0:N0}", @Model.DonGiaMua) đ</td>
+    </tr>
+
+    <tr>
+        <th>Đơn giá bán</th>
+        <td>@string.Format("{0:N0}", @Model.DonGiaBan) đ</td>
+    </tr>
+
+    <tr>
+        <th>Số lượng</th>
+        <td>@Model.SoLuong</td>
+    </tr>
+
+    <tr>
+        <th>Hình ảnh</th>
+        <td>
+            <img class="zoom" src="~/Content/images/@Model.TenHinh"style="width: 200px;height:200px" /> 
+        </td>
+    </tr>
+
+
+    <tr>
+        <th>Giảm giá</th>
+        <td>@string.Format("{0:N0}", @Model.GiamGia) đ</td>
+    </tr>
+
+    <tr>
+        <th>Mô tả</th>
+        <td>@Model.MoTa</td>
+    </tr>
+</table>
+@*<a class="btn btn-outline-primary text-decoration-none" href="/Admin/QL_SanPham/TrangChu">Trở về trang chủ</a>*@
+@Html.ActionLink("Trở về trang chủ", "TrangChu", "QL_SanPham", null, new { @class = "btn btn-outline-primary text-decoration-none" })

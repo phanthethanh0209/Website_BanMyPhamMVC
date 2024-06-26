@@ -1,0 +1,58 @@
+﻿@model List<WebsiteTheFaceShop.ViewModels.GioHang>
+<div class="mini-cart">
+    <div class="heading-cart">
+        <a href="~/Cart/Index" id="cart-icon" class="ti-shopping-cart cart"></a>
+        <span class="quantity-cart">@Model.Count</span>
+    </div>
+        @if (Model.Count > 0)
+        {
+    <div class="top-cart-content">
+        <div id="cart-sidebar">
+                    <ul class="list-item-cart">
+                        @foreach (var item in Model)
+                        {
+                            <li class="item">
+                                <div class="row row2 justify-content-between">
+                                    <div class="col-md-2 img-item">
+                                        <img src="~/Content/images/@item.SanPham.TenHinh" alt="">
+                                        @*@item.SanPham.TenHinh*@ 
+                                    </div>
+                                    <div class="col-md-8 info-product">
+                                        
+                                        <a href="/SanPham/ChiTietSP/@item.SanPham.MaSP" class="text-black text-decoration-none"><div class="name-product"> @item.SanPham.TenSP</div></a>
+                                        <div class="cost-product">@item.SanPham.DonGiaBan.GetValueOrDefault(0).ToString("N0")</div>
+                                        <div class="quantity"><input type="number" value=@item.SoLuong min="0" readonly="readonly"></div>
+                                    </div>
+                                    @*<div class="col-md-2 delete-product">
+                                        <div class="delete-icon">
+                                            <i class="ti-trash"></i>
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                    @*<div class="total-money">
+                        <div class="title">Tổng tiền: </div>
+                        <div class="price">
+                            <span class="total-cost">0</span>
+                            <span class="VND">₫</span>
+                        </div>
+                    </div>*@
+
+                    <div class="makepayment d-d-flex align-items-center justify-content-center">
+                        @*<button>*@
+                            @*<a href="#">Chốt đơn ngay</a>*@
+                        <button type="button">
+                            @Html.ActionLink("Chốt đơn ngay", "Index", "Cart", new {@class="d-block" })
+                        </button>
+                        @*</button>*@
+                    </div>
+        </div>
+    </div>
+         }
+        else
+        {
+             <div class="cart-empty-message">Không có sản phẩm nào trong giỏ hàng</div>
+        }
+</div>

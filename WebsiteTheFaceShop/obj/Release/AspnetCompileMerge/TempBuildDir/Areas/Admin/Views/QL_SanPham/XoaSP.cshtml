@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Xóa Sản Phẩm";
+
+}
+@model WebsiteTheFaceShop.Models.SANPHAM
+@using WebsiteTheFaceShop.Areas.HtmlHelpers
+
+<style>
+    .zoom {
+        transition: transform .5s;
+        width: 200px;
+        margin: 0 auto;
+    }
+
+        .zoom:hover {
+            transform: scale(2.5);
+        }
+</style>
+
+@using (Html.BeginForm("XoaSP", "QL_SanPham", new { area = "Admin" }, FormMethod.Post,
+    new { enctype = "multipart/dorm-data" }))
+    {
+        <h2>Bạn có chắc chắn muốn xóa sản phẩm này không?</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Mã sản phẩm</th>
+                <td>@Model.MaSP</td>
+            </tr>
+
+            <tr>
+                <th>Tên sản phẩm</th>
+                <td>@Model.TenSP</td>
+            </tr>
+
+            <tr>
+                <th>Tên loại</th>
+                <td>@Model.TenLoai</td>
+            </tr>
+
+            <tr>
+                <th>Tên thương hiệu</th>
+                <td>@Model.TenThuongHieu</td>
+            </tr>
+
+            <tr>
+                <th>Tên danh mục</th>
+                <td>@ViewBag.TenDanhMuc</td>
+            </tr>
+
+            <tr>
+                <th>Đơn giá mua</th>
+                <td>@string.Format("{0:N0}", @Model.DonGiaMua) đ</td>
+            </tr>
+
+            <tr>
+                <th>Đơn giá bán</th>
+                <td>@string.Format("{0:N0}", @Model.DonGiaBan) đ</td>
+            </tr>
+
+            <tr>
+                <th>Số lượng</th>
+                <td>@Model.SoLuong</td>
+            </tr>
+
+            <tr>
+                <th>Hình ảnh</th>
+                <td>
+                    <img class="zoom" src="~/Content/images/@Model.TenHinh"style="width: 200px;height:200px" /> 
+                </td>
+            </tr>
+            <tr>
+                <th>Giảm giá</th>
+                <td>@string.Format("{0:N0}", @Model.GiamGia)</td>
+            </tr>
+
+            <tr>
+                <th>Mô tả</th>
+                <td>@Model.MoTa</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <input type="submit" name="submit" class="btn btn-danger" value="Xóa" />
+        </div>
+    }
+@*<form action="/Admin/QL_SanPham/XoaSP/@Model.MaSP" method="post">
+
+
+    </form>*@
+@*<a class="btn btn-outline-primary text-decoration-none" href="/Admin/QL_SanPham/TrangChu">Trở về trang chủ</a>*@
+@Html.ActionLink("Trở về trang chủ", "TrangChu", "QL_SanPham", null, new { @class = "btn btn-outline-primary text-decoration-none" })

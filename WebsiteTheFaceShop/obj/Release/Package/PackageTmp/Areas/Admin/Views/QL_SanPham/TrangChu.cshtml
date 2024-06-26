@@ -1,0 +1,194 @@
+﻿<!--ĐÂY LÀ TRANG GIAO DIỆN HIỂN THỊ DANH SÁCH CÁC SẢN PHẨM CỦA ADMIN-->
+@{
+    ViewBag.Title = "Quản Lý Sản Phẩm";
+
+}
+@model List<WebsiteTheFaceShop.Models.SANPHAM>
+
+<!--TÍNH NĂNG SẮP XẾP SP-->
+@{
+    string iconClass = "";
+    if (ViewBag.IconClass == "fa-sort-desc")
+    {
+        iconClass = "fa-sort-asc";
+    }
+    else
+    {
+        iconClass = "fa-sort-desc";
+    }
+}
+
+<style>
+    a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<h2 class="fw-bold text-black p-2">Quản lý sản phẩm</h2>
+
+<div class="row text-end my-3">
+    <!--TÍNH NĂNG TÌM KIẾM SẢN PHẨM-->
+    <div class="col-8">
+
+        <form action="/Admin/QL_SanPham/TrangChu" class="w-75 d-flex">
+            <input type="search"
+                   class="form-control m-auto"
+                   id="search"
+                   name="search"
+                   value="@ViewBag.Search"
+                   placeholder="Tìm kiếm theo tên sản phẩm" />
+            <button type="submit" class="btn btn-primary mx-2">Search</button>
+        </form>
+
+    </div>
+
+    <!--TÍNH NĂNG LỌC SẢN PHẨM- Chưa làm được-->
+    @*<div class="col-4">
+            <select class="form-select form-select-md" aria-label="Small select example">
+                <option selected>Xem tất cả sản phẩm</option>
+                <option value="1">Son</option>
+                <option value="2">Mặt nạ</option>
+                <option value="3">Collagen</option>
+            </select>
+        </div>*@
+</div>
+
+<!--HIỂN THỊ BẢNG DANH SÁCH CÁC SẢN PHẨM-->
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <h4 class="text-danger text-center">
+        @ViewBag.Message
+    </h4>
+}
+else
+{
+    <table class="table table-bordered " border="1">
+        <tr class="table-danger text-black ">
+            <th>
+                @*<a href="/Admin/QL_SanPham/TrangChu?SortColumn=MaSP&IconClass=@iconClass&page=1">Mã Sản Phẩm</a>*@
+                @Html.ActionLink("Mã Sản Phẩm", "TrangChu", "QL_SanPham", new { SortColumn = "MaSP", IconClass = iconClass, page = 1 }, null)
+
+                @if (ViewBag.SortColumn == "MaSP")
+                {
+                    <i class="fa @ViewBag.IconClass"></i>
+                }
+            </th>
+            <th>
+                @*<a href="/Admin/QL_SanPham/TrangChu?SortColumn=TenSP&IconClass=@iconClass&page=1">Tên Sản Phẩm</a>*@
+                @Html.ActionLink("Tên Sản Phẩm", "TrangChu", "QL_SanPham", new { SortColumn = "MaSP", IconClass = iconClass, page = 1 }, null)
+
+                @if (ViewBag.SortColumn == "TenSP")
+                {
+                    <i class="fa @ViewBag.IconClass"></i>
+                }
+            </th>
+            <th>Ảnh bìa</th>
+            <th>
+                @*<a href="/Admin/QL_SanPham/TrangChu?SortColumn=TenLoai&IconClass=@iconClass&page=1">Tên Loại</a>*@
+                @Html.ActionLink("Tên Loại", "TrangChu", "QL_SanPham", new { SortColumn = "MaSP", IconClass = iconClass, page = 1 }, null)
+
+                @if (ViewBag.SortColumn == "TenLoai")
+                {
+                    <i class="fa @ViewBag.IconClass"></i>
+                }
+            </th>
+            @*<th>Tên thương hiệu</th>*@
+            <th>Số lượng</th>
+            @*<th>Đơn giá mua</th>*@
+            <th>Đơn giá bán</th>
+            <th>Tác vụ</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="row">@item.MaSP</th>
+            <td>@item.TenSP</td>
+            <td>
+                <img src="~/Content/images/@item.TenHinh" style="width:100px;height:100px" />
+            </td>
+            <td>@item.TenLoai</td>
+            @*<td>@item.TenThuongHieu</td>*@
+            <td>@item.SoLuong</td>
+            @*<td>@item.DonGiaMua.GetValueOrDefault(0).ToString("N0")</td>*@
+            <td>@item.DonGiaBan.GetValueOrDefault(0).ToString("N0") đ</td>
+            <td class="text-center">
+                <a class="btn btn-outline-primary" href="/Admin/QL_SanPham/XemChiTietSP/@item.MaSP">Xem chi tiết</a>
+                @*@Html.ActionLink("Xem chi tiết", "XemChiTietSP", "QL_SanPham", new { item.MaSP }, new { @class = "btn btn-outline-primary" })
+                @Html.ActionLink("Sửa", "ChinhSuaSP", "QL_SanPham", new { item.MaSP }, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Xóa", "XoaSP", "QL_SanPham", new { item.MaSP }, new { @class = "btn btn-outline-danger" })*@
+                <a class="btn btn-outline-info" href="/Admin/QL_SanPham/ChinhSuaSP/@item.MaSP">Sửa</a>
+                <a class="btn btn-outline-danger" href="/Admin/QL_SanPham/XoaSP/@item.MaSP">Xóa</a>
+            </td>
+        </tr>
+        }
+
+        <!--TÍNH NĂNG PHÂN TRANG-->
+        <tr>
+            <td colspan="9">
+                @{
+                    int PrevPage = ViewBag.Page - 1;
+                    if (PrevPage <= 0)
+                    {
+                        PrevPage = 1;
+                    }
+                    int NextPage = ViewBag.Page + 1;
+                    if (NextPage > ViewBag.NoOfPages)
+                    {
+                        NextPage = ViewBag.NoOfPages;
+                    }
+
+                }
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        @*<a class="page-link" href="/Admin/QL_SanPham/TrangChu?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@PrevPage">
+                                Trước
+                            </a>*@
+                        @Html.ActionLink("Trước", "TrangChu", "QL_SanPham", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = PrevPage }, new { @class = "page-link" })
+
+                    </li>
+                    @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                    {
+                        if (i + 1 == ViewBag.Page)
+                        {
+                            <li class="page-item active">
+                                @*<a class="page-link" href="/Admin/QL_SanPham/TrangChu?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@(i+1)">
+                                        @(i + 1)
+                                    </a>*@
+                                @Html.Raw(Html.ActionLink((i + 1).ToString(), "TrangChu", "QL_SanPham", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = (i + 1).ToString() }, new { @class = "page-link" }).ToHtmlString())
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                @*<a class="page-link" href="/Admin/QL_SanPham/TrangChu?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@(i+1)">
+                                        @(i + 1)
+                                    </a>*@
+                                @Html.Raw(Html.ActionLink((i + 1).ToString(), "TrangChu", "QL_SanPham", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = (i + 1).ToString() }, new { @class = "page-link" }).ToHtmlString())
+
+                            </li>
+                        }
+                    }
+                    <li class="page-item active">
+                        @*<a class="page-link" href="/Admin/QL_SanPham/TrangChu?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&page=@NextPage">
+                                Tiếp
+                            </a>*@
+                        @Html.ActionLink("Tiếp", "TrangChu", "QL_SanPham", new { SortColumn = ViewBag.SortColumn, IconClass = ViewBag.IconClass, page = NextPage }, new { @class = "page-link" })
+
+                    </li>
+                </ul>
+            </td>
+        </tr>
+
+    </table>
+}
+
+<!--TÍNH NĂNG THÊM MỚI SP VÀO DATABASE-->
+<div class="text-center">
+    @Html.ActionLink("+ Thêm sản phẩm", "ThemSP", null, new { @class = "btn btn-success text-white text-decoration-none" })
+</div>
+
+
+
+

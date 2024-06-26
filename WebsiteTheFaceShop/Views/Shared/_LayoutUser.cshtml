@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/root/img/logo-footer.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/root/themify-icons/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="~/root/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="~/root/bootstrap/bootstrap-5.3.0-alpha3-dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="~/root/css/style_main.css">
+    <link rel="stylesheet" href="~/root/css/style_TrangChu.css">
+    <link rel="stylesheet" href="~/root/css/style_ChiTietSP.css">
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+
+        .validation-summary-errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <!--Begin Header-->
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="header-top">
+                    <div class="header-container d-flex align-items-center">
+
+                        <label for="nav_mobile_input" class="menu-bar nav-mobile-button hidden-lg">
+                            <i class="fas fa-bars"></i>
+                        </label>
+
+                        <div class="img-canvas col-lg-3 col-md-3 m-auto">
+                            <a href="/Home/TrangChu"><canvas id="linecanvas" width="100" height="90"></canvas></a>
+                        </div>
+
+                        <input type="checkbox" hidden name="" class="nav_input" id="nav_mobile_input">
+
+                        <label for="nav_mobile_input" class="nav_overlay"></label>
+                        <div class="sidebar_mobile">
+                            <div class="nav-user-login">
+                                <div class="icon-nav-user d-flex flex-column align-items-center ">
+                                    <div class="icon-nav"> <i class="fa-solid fa-user"></i></div>
+                                    <div>Chào mừng bạn đã đến</div>
+                                </div>
+                                <div class="button-login-signup d-flex align-items-center justify-content-between">
+                                    <a href="#"> ĐĂNG NHẬP</a>
+                                    <a href="/Home/TrangDangKy">ĐĂNG KÝ</a>
+                                </div>
+                            </div>
+
+                            <label for="nav_mobile_input" class="nav_mobile_close"><i class="fa-solid fa-xmark"></i></label>
+
+                            <ul class="nav_mobile navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Home/TrangChu">Trang chủ </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/Home/GioiThieu">Giới thiệu</a>
+                                </li>
+                                <li class="product box">
+                                    <div class="menu-level2 d-flex align-items-center justify-content-between">
+                                        <a href="~/TrangSonThoi.html">Sản phẩm</a><i class="fa-solid fa-plus icon-plus btn"></i>
+                                    </div>
+                                    <div class="nav-level2 text">
+                                        <div class="nav-content">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="sale box">
+                                    <div class="menu-level2 d-flex align-items-center justify-content-between">
+                                        <a href="~/TrangBigSale.html">khuyến mãi hot</a><i class="fa-solid fa-plus icon-plus btn"></i>
+                                    </div>
+                                    <div class="nav-level2-2  text">
+                                        <ul class="menu-sale">
+                                            <li><a href="~/TrangSanPhamMoi.html">Vừa ra mắt</a> </li>
+                                            <li><a href="~/TrangBigSale.html">Big Sale</a> </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a href="~/Home/LienHe.html">liên hệ</a> </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 hidden-sm">
+                            <div class=" input-search d-flex align-items-center ">
+                                <input type="text" placeholder="Tìm kiếm tên sản phẩm ..." size="70">
+                                <span class="input-search-btn d-flex align-items-center">
+                                    <button class="ti-search"></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="icon d-flex align-items-center">
+                                <div class="user hidden-sm">
+                                    <a href="#" class="icon-user">
+                                        <img src="~/root/img/icon_user.jpg" alt="">
+                                    </a>
+
+
+                                    <!--Trường hợp đã đăng nhập thành công-->
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        if (User.IsInRole("Admin") || (User.IsInRole("Manager")))
+                                        {
+                                            <div class="account">
+                                                <div class="login">
+                                                    <a href="/Account/DangXuat">Đăng xuất</a>
+                                                </div>
+                                                <div class="signup">
+                                                    <a href="~/Admin/QL_SanPham/TrangChu">Trang quản trị</a>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="account2">
+                                                <div class="login js-login">
+                                                    <a href="/Account/DangXuat">Đăng xuất</a>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <div class="account ">
+                                            <div class="login">
+                                                <a href="/Account/DangNhap">Đăng nhập</a>
+                                            </div>
+                                            <div class="signup">
+                                                <a href="/Account/DangKy">Đăng ký</a>
+                                            </div>
+                                        </div>
+
+                                    }
+
+
+                                </div>
+
+                                
+                                 @if (User.Identity.IsAuthenticated)
+                                 { 
+                                    <span style="color:red ; font-weight:bold; font-size:16pt">
+                                        Hello @User.Identity.Name 😘
+                                    </span>
+                                 }
+
+                                @{Html.RenderAction("HeaderCart", "Cart");}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row hidden-sm hidden-md">
+                <div class="sidebar px-md-2 ps-xxl-5">
+                    <ul class="nav ms-xxl-5 ps-xxl-5">
+                        <li><a href="/Home/TrangChu">trang chủ</a> </li>
+                        <li class="product">
+                            <a href="/SanPham/ListSanPham">sản phẩm<i class="nav-arrow-down ti-angle-down "></i></a>
+                            <div class="nav-level2">
+                                <div class="nav-content">
+                                    <ul class="nav-list">
+                                        @Html.Action("DanhMuc", "Home")
+
+                                    </ul>
+                                </div>
+
+                                <div class="nav-banner-menu">
+                                    <a href="#"><img src="~/root/img/banner1.jfif" alt=""></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="sale">
+                            <a href="/SanPham/ListSanPham">khuyến mãi hot<i class="nav-arrow-down ti-angle-down "></i></a>
+                            <div class="nav-level2-2">
+                                <ul class="menu-sale">
+                                    <li><a href="/SanPham/SanPhamMoi">Vừa ra mắt</a> </li>
+                                    <li><a href="/SanPham/KhuyenMai">Big Sale</a> </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="/Home/TinTuc">tin tức</a> </li>
+                        <li><a href="/Home/LienHe">liên hệ</a> </li>
+                        <li><a href="/Home/GioiThieu">giới thiệu</a> </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row hidden-md-lg">
+                <div class=" input-search d-flex align-items-center p-3">
+                    <input type="text" placeholder="Tìm kiếm tên sản phẩm ..." size="100">
+                    <span class="input-search-btn d-flex align-items-center">
+                        <button class="ti-search"></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="~/root/js/logo.js"></script>
+    <!--End Header-->
+    <!--Content Body-->
+    <div>
+        @RenderBody()
+    </div>
+
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "118019591254404");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v18.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!--Foooter-->
+
+
+
+    <div id="footer">
+        <div class="container-fluid ">
+            <div class="row py-xl-4 py-md-2">
+                <div class="col-lg-4 col-md-3">
+                    <a class="logo-footer" href="#">
+                        <img src="~/root/img/logo.png" alt="">
+                    </a>
+                    <div class="slogan">
+                        <p class="p-0 m-0 fw-bold">THE FACE SHOP</p>
+                        <p>Vẻ đẹp của bạn, niềm tự hào của chúng tôi</p>
+                    </div>
+                    <div class="address">
+                        <ul class="px-0">
+                            <li>Địa chỉ: THE FACE SHOP, 167 Nam Kỳ Khởi Nghĩa, Quận 1, TP. Hồ Chí Minh </li>
+                            <li>Hotline: 1900 8198</li>
+                            <li>Giờ làm việc: 8AM - 5PM (Thứ 2- Thứ 6, trừ các ngày lễ, tết)</li>
+                            <li>Email: contact@thefaceshop.com.vn</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-2 pt-md-4">
+                    <h4 class="menu">
+                        <a class="title-menu" href="#">Danh mục</a>
+                    </h4>
+                    <hr class="border-2 p-0 m-0 w-50" />
+                    <div class="list-menu">
+                        <ul class="px-0">
+                            <li><a href="#">Home</a> </li>
+                            <li><a href="#">Đồng giá 99k</a></li>
+                            <li><a href="#">New</a> </li>
+                            <li><a href="#">Bán chạy</a> </li>
+                            <li><a href="#">Chăm sóc da</a> </li>
+                            <li><a href="#">Trang điểm</a> </li>
+                            <li><a href="#">Thương hiệu</a> </li>
+                            <li><a href="#">Tạp chí làm đẹp</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 pt-md-4">
+                    <h4 class="menu">
+                        <a class="title-menu" href="#">Hỗ trợ khách hàng</a>
+                    </h4>
+                    <hr class="border-2 p-0 m-0 w-50" />
+                    <div class="list-menu">
+                        <ul class="px-0">
+                            <li><a href="#">Hướng dẫn mua hàng</a> </li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">Chính sách đổi trả sản phẩm</a></li>
+                            <li><a href="#">Phương thức thanh toán</a> </li>
+                            <li><a href="#">Phương thức vận chuyển</a> </li>
+                            <li><a href="#">Các câu hỏi thường gặp</a></li>
+                            <li><a href="#">Tạp chí Beauty Secret</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 pt-md-4">
+                    <div class=" social-footer ">
+                        <h4 class="menu ">
+                            <a class="title-menu " href="# ">Kết nối với chúng tôi</a>
+                        </h4>
+                        <hr class="border-2 pb-1 m-0 w-50" />
+                        <ul class="follow-option ">
+                            <li><a href="# "><i class="ti-facebook icon-footer "></i></a></li>
+                            <li><a href="# "><i class="ti-instagram icon-footer "></i></a></li>
+                            <li><a href="# "><i class="ti-twitter-alt icon-footer "></i></a></li>
+                            <li><a href="# "><i class="ti-google icon-footer "></i></a></li>
+                            <li><a href="# "><i class="ti-youtube icon-footer "></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="mail-footer ">
+                        <div class="pay ">
+                            <h4 class="menu ">
+                                <a class="title-menu " href="# ">phương thức thanh toán</a>
+                            </h4>
+                            <div class="Paypal ">
+                                <a href="# "><img src="~/root/img/i_payment.png " alt=""></a>
+                                <img class="img-fluid w-75 mx-4" src="~/root/img/logoBoCongThuong.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Phone ring-->
+            <div class="hotline-phone-ring-wrap">
+                <div class="hotline-phone-ring">
+                    <div class="hotline-phone-ring-circle"></div>
+                    <div class="hotline-phone-ring-circle-fill"></div>
+                    <div class="hotline-phone-ring-img-circle">
+                        <a href="tel:0988488263" class="pps-btn-img">
+                            <img src="https://isharevn.net/wp-content/uploads/2021/05/icon-call-nh.png" alt="Gọi điện thoại" width="50">
+                        </a>
+                    </div>
+                </div>
+                <div class="hotline-bar">
+                    <a href="tel:0985092837">
+                        <span class="text-hotline">1900 8198</span>
+                    </a>
+                </div>
+            </div>
+
+            @{
+                int currentYear = DateTime.Now.Year;
+            }
+
+            <div class="container-fluid text-center">
+                <h6 class="p-3 m-0">The Face Shop @currentYear. &#169; Copyright by <span style="color: #6fcefc" class="fw-bolder">BLUE SKY TEAM</span>. All Rights Reserved.</h6>
+            </div>
+
+        </div>
+    </div>
+    <a class="gotobtn " href="#header "><i class="ti-arrow-up "></i></a>
+    <script src="~/root/js/form_login2.js"></script>
+    <!-- js hiện form lên giữa màn hình -->
+    <script src="~/root/js/form_login.js "></script>
+    <script src="~/root/js/changeImage.js "></script>
+    <!-- <script src="./root/js/show_menuchild_mobile.js"></script> -->
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>
